@@ -1,5 +1,9 @@
 const listing = require("../models/listing.js");
 
+module.exports.listing = (req, res) => {
+  res.redirect("/listing");
+};
+
 module.exports.index = async (req, res) => {
   let { search } = req.query;
 

@@ -42,6 +42,7 @@ const setSession = {
     sameSite: "lax",
   },
 };
+
 app.set("trust proxy", 1);
 app.use(session(setSession));
 app.use(express.urlencoded({ extended: true }));
