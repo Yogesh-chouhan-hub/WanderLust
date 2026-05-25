@@ -17,8 +17,6 @@ const {
 
 router.get("/suggestions", wrapAsync(listingController.searchSuggestions));
 
-router.get("/", wrapAsync(listingController.listing));
-
 router
   .route("/new")
   .post(
