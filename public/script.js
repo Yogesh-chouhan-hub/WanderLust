@@ -1,10 +1,9 @@
-const hamburger = document.getElementById("hamburger");
 const navLinks = document.getElementById("navLinks");
 const overlay = document.getElementById("overlay");
 
 function toggleMenu() {
-  hamburger.classList.toggle("active");
   navLinks.classList.toggle("active");
+
   overlay.classList.toggle("active");
 }
 
