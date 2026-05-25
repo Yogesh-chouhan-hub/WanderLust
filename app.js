@@ -3,7 +3,6 @@ if (process.env.NODE_ENV != "production") {
 }
 const express = require("express");
 const app = express();
-const port = 8080;
 const path = require("path");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
@@ -17,6 +16,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+const PORT = process.env.PORT || 8080;
 
 main()
   .then(() => {
@@ -27,19 +27,22 @@ main()
   });
 
 async function main() {
-  await mongoose.connect("mongodb://localhost:27017/wanderlust");
+  await mongoose.connect(process.env.MONGO_URL);
 }
 
 const setSession = {
-  secret: "qwerty@123",
+  secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
-    expires: Date.now() * 7 * 24 * 60 * 60 * 1000,
+    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
   },
 };
-
+app.set("trust proxy", 1);
 app.use(session(setSession));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -78,6 +81,6 @@ app.use((err, req, res, next) => {
   res.status(status).send(message);
 });
 
-app.listen(port, () => {
-  console.log(`Server is listening on port : ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is listening on port : ${PORT}`);
 });
