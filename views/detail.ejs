@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title><%= info.title %></title>
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/rating.css">
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ================= GLOBAL ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f4f7fb;
+    color:#1f2937;
+    overflow-x:hidden;
+}
+
+a{
+    text-decoration:none;
+}
+
+.container{
+    max-width:1300px;
+    margin:auto;
+    padding:40px 24px 80px;
+}
+
+/* ================= TITLE ================= */
+
+.page-top{
+    margin-bottom:35px;
+}
+
+.title{
+    font-size:52px;
+    font-weight:800;
+    color:#111827;
+    margin-bottom:10px;
+    line-height:1.2;
+}
+
+.subtitle{
+    color:#6b7280;
+    font-size:16px;
+}
+
+/* ================= HERO IMAGE ================= */
+
+.hero-image{
+    width:100%;
+    border-radius:30px;
+    overflow:hidden;
+    position:relative;
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,0.12);
+}
+
+.hero-image img{
+    width:100%;
+    height:600px;
+    object-fit:cover;
+
+    transition:0.5s ease;
+}
+
+.hero-image:hover img{
+    transform:scale(1.05);
+}
+
+.hero-image::after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.35),
+        transparent 55%
+    );
+}
+
+/* ================= MAIN SECTION ================= */
+
+.main-section{
+    display:grid;
+    grid-template-columns: 1.6fr 0.9fr;
+    gap:40px;
+
+    margin-top:45px;
+
+    align-items:start;
+
+    width:100%;
+}
+
+/* ================= LEFT SIDE ================= */
+
+.left-section{
+    width:100%;
+    min-width:0;
+
+    display:flex;
+    flex-direction:column;
+    gap:30px;
+}
+
+.info-card,
+.review-form-container,
+.review-card{
+    background:white;
+    border-radius:28px;
+    padding:35px;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.06);
+}
+
+/* ================= HOST ================= */
+
+.host-box{
+    display:flex;
+    align-items:center;
+    gap:16px;
+
+    margin-bottom:24px;
+}
+
+.host-avatar{
+    width:60px;
+    height:60px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        #ff385c,
+        #ff7a18
+    );
+
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:22px;
+    font-weight:700;
+}
+
+.host-info h4{
+    margin-bottom:3px;
+    font-size:18px;
+}
+
+.host-info p{
+    color:#777;
+    font-size:14px;
+}
+
+/* ================= DESCRIPTION ================= */
+
+.description{
+    font-size:17px;
+    line-height:2;
+    color:#4b5563;
+
+    margin-bottom:25px;
+}
+
+/* ================= LOCATION ================= */
+
+.location{
+    background:#f9fafb;
+    border:1px solid #ececec;
+
+    padding:18px 20px;
+
+    border-radius:18px;
+
+    font-weight:600;
+    color:#374151;
+}
+
+/* ================= RIGHT SIDE ================= */
+/* ================= RIGHT SECTION ================= */
+
+.right-section{
+    display:flex;
+    width:100%;
+    justify-content:center;
+    align-items:flex-start;
+}
+
+/* ================= BOOKING CARD ================= */
+
+.booking-card{
+    width:100%;
+
+    background:#ffffff;
+
+    border-radius:28px;
+
+    padding:32px;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:
+        0 4px 20px rgba(0,0,0,0.05);
+
+    transition:0.3s ease;
+}
+
+.booking-card:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.08);
+}
+
+/* ================= PRICE ================= */
+
+.price{
+    display:flex;
+    align-items:flex-end;
+    gap:8px;
+
+    margin-bottom:28px;
+}
+
+.price h2{
+    font-size:48px;
+    font-weight:700;
+
+    color:#111827;
+
+    margin:0;
+
+    line-height:1;
+}
+
+.price span{
+    font-size:17px;
+    color:#6b7280;
+
+    margin-bottom:6px;
+}
+
+/* ================= BOOK BUTTON ================= */
+
+.book-btn{
+    width:100%;
+
+    border:none;
+
+    padding:15px;
+
+    border-radius:16px;
+
+    background:#111827;
+
+    color:white;
+
+    font-size:16px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.25s ease;
+
+    margin-bottom:18px;
+}
+
+.book-btn:hover{
+    background:#000;
+
+    transform:translateY(-2px);
+}
+
+/* ================= ACTION BUTTONS ================= */
+
+.card-actions{
+    display:flex;
+    gap:12px;
+    flex-direction: column;
+}
+
+.card-actions form{
+    flex:1;
+    margin:0;
+}
+
+.edit-btn,
+.delete-btn{
+    width:100%;
+
+    padding:13px;
+
+    border-radius:14px;
+
+    font-size:15px;
+    font-weight:500;
+
+    border:none;
+
+    cursor:pointer;
+
+    transition:0.25s ease;
+
+    text-align:center;
+}
+
+/* EDIT */
+
+.edit-btn{
+    background:#f3f4f6;
+    color:#111827;
+}
+
+.edit-btn:hover{
+    background:#e5e7eb;
+}
+
+/* DELETE */
+
+.delete-btn{
+    background:#111827;
+    color:white;
+}
+
+.delete-btn:hover{
+    background:#000;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:768px){
+
+    .booking-card{
+        padding:24px;
+    }
+
+    .price h2{
+        font-size:40px;
+    }
+
+    .card-actions{
+        flex-direction:column;
+    }
+
+}
+
+/* ================= REVIEW FORM ================= */
+
+.review-form-container h2{
+    font-size:32px;
+    margin-bottom:28px;
+}
+
+.form-group{
+    margin-bottom:24px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:10px;
+
+    font-weight:600;
+}
+
+.form-group textarea{
+    width:100%;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    border:1px solid #ddd;
+
+    outline:none;
+
+    resize:none;
+
+    transition:0.3s;
+}
+
+.form-group textarea:focus{
+    border-color:#ff385c;
+
+    box-shadow:
+        0 0 0 4px rgba(255,56,92,0.12);
+}
+
+/* ================= STAR RATING ================= */
+
+.starability-slot{
+    margin-top:10px;
+}
+
+/* ================= SUBMIT BUTTON ================= */
+
+.submit-btn{
+    border:none;
+
+    background:#111827;
+    color:white;
+
+    padding:15px 30px;
+
+    border-radius:14px;
+
+    font-weight:600;
+
+    transition:0.3s ease;
+}
+
+.submit-btn:hover{
+    background:black;
+    transform:translateY(-2px);
+}
+
+/* ================= REVIEWS ================= */
+
+.reviews-section{
+    margin-top:20px;
+}
+
+.reviews-title{
+    font-size:38px;
+    margin-bottom:30px;
+    font-weight:800;
+}
+
+.review-card{
+    margin-bottom:24px;
+
+    transition:0.35s ease;
+}
+
+.review-card:hover{
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.08);
+}
+
+.review-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:18px;
+}
+
+.review-user{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.review-avatar{
+    width:52px;
+    height:52px;
+
+    border-radius:50%;
+
+    background:#111827;
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-weight:700;
+}
+
+.review-user h4{
+    font-size:17px;
+    margin-bottom:2px;
+}
+
+.review-date{
+    color:#888;
+    font-size:14px;
+}
+
+.review-rating{
+    background:#fff7ed;
+
+    color:#ea580c;
+
+    padding:10px 16px;
+
+    border-radius:14px;
+
+    font-weight:700;
+    font-size:14px;
+}
+
+.review-comment{
+    color:#4b5563;
+    line-height:2;
+    font-size:16px;
+}
+
+/* ================= DELETE REVIEW ================= */
+
+.del-btn{
+    margin-top:20px;
+
+    border:none;
+
+    background:#111827;
+    color:white;
+
+    padding:12px 18px;
+
+    border-radius:12px;
+
+    transition:0.3s;
+}
+
+.del-btn:hover{
+    background:black;
+    transform:translateY(-2px);
+}
+
+/* ================= EMPTY REVIEW ================= */
+
+.no-review{
+    background:white;
+
+    padding:35px;
+
+    border-radius:24px;
+
+    text-align:center;
+
+    color:#777;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.05);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1100px){
+
+    .main-section{
+        grid-template-columns:1fr;
+    }
+
+    .right-section{
+        position:static;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .container{
+        padding:25px 16px 60px;
+    }
+
+    .title{
+        font-size:36px;
+    }
+
+    .hero-image img{
+        height:330px;
+    }
+
+    .info-card,
+    .booking-card,
+    .review-form-container,
+    .review-card{
+        padding:24px;
+        border-radius:22px;
+    }
+
+    .reviews-title{
+        font-size:30px;
+    }
+
+    .card-actions{
+        flex-direction:column;
+    }
+
+    .price h2{
+        font-size:38px;
+    }
+
+    .review-top{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:16px;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .title{
+        font-size:30px;
+    }
+
+    .description{
+        font-size:15px;
+        line-height:1.8;
+    }
+
+    .host-avatar,
+    .review-avatar{
+        width:48px;
+        height:48px;
+    }
+
+    .review-rating{
+        width:100%;
+        text-align:center;
+    }
+
+}
+
+
+</style>
+<link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+</head>
+
+<body>
+
+<%- include("include/navbar.ejs") %>
+<%- include("include/flash.ejs") %>
+
+<div class="container">
+
+    <!-- TITLE -->
+
+    <div class="page-top">
+
+        <h1 class="title">
+            <%= info.title %>
+        </h1>
+
+        <p class="subtitle">
+            Luxury stay experience with premium comfort
+        </p>
+        
+
+    </div>
+
+    <!-- HERO IMAGE -->
+
+    <div class="hero-image">
+        <img src="<%= info.image.url %>" alt="listing image">
+    </div>
+
+    <!-- MAIN SECTION -->
+
+    <div class="main-section">
+
+        <!-- LEFT -->
+
+        <div class="left-section">
+
+            <!-- INFO CARD -->
+
+            <div class="info-card">
+
+                <div class="host-box">
+
+                    <div class="host-avatar">
+                        <%= info.owner.username.charAt(0).toUpperCase() %>
+                    </div>
+
+                    <div class="host-info">
+                        <h4><%= info.owner.username %></h4>
+                        <p>Property Host</p>
+                    </div>
+
+                </div>
+
+                <p class="description">
+                    <%= info.description %>
+                </p>
+
+                <div class="location">
+                    📍 <%= info.location %>, <%= info.country %>
+                </div>
+
+            </div>
+             <div class="right-section">
+
+            <div class="booking-card">
+
+                <h3 class="price">
+  ₹<%= info.price.toLocaleString("en-IN") %>
+  <span>/ night</span>
+</h3>
+
+                <button class="book-btn">
+                    Reserve Now
+                </button>
+
+                <% if (isCurrent && isCurrent._id.equals(info.owner._id)) { %>
+
+                <div class="card-actions">
+
+                    <a
+                        href="/listing/edit/<%= info._id %>"
+                        class="edit-btn"
+                    >
+                        Edit
+                    </a>
+
+                    <form
+                        method="POST"
+                        action="/listing/delete/<%= info._id %>?_method=DELETE"
+                        style="flex:1;"
+                    >
+
+                        <button class="delete-btn w-100">
+                            Delete
+                        </button>
+
+                    </form>
+
+                </div>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+            <!-- REVIEW FORM -->
+
+            <% if(isCurrent){ %>
+
+            <div class="review-form-container">
+
+                <h2>Add Your Review</h2>
+
+                <form
+                    method="POST"
+                    action="/listing/<%= info._id %>/review"
+                >
+
+                   <fieldset class="starability-slot">
+
+    <input
+        type="radio"
+        id="rate1"
+        name="rating"
+        value="1"
+        checked
+    />
+    <label for="rate1" title="Terrible">
+        1 star
+    </label>
+
+    <input
+        type="radio"
+        id="rate2"
+        name="rating"
+        value="2"
+    />
+    <label for="rate2" title="Not good">
+        2 stars
+    </label>
+
+    <input
+        type="radio"
+        id="rate3"
+        name="rating"
+        value="3"
+         
+    />
+    <label for="rate3" title="Average">
+        3 stars
+    </label>
+
+    <input
+        type="radio"
+        id="rate4"
+        name="rating"
+        value="4"
+    />
+    <label for="rate4" title="Very good">
+        4 stars
+    </label>
+
+    <input
+        type="radio"
+        id="rate5"
+        name="rating"
+        value="5"
+    />
+    <label for="rate5" title="Amazing">
+        5 stars
+    </label>
+
+</fieldset>
+
+                    <div class="form-group">
+
+                        <label for="cmt">
+                            Comment
+                        </label>
+
+                        <textarea
+                            name="comment"
+                            id="cmt"
+                            rows="5"
+                            placeholder="Write your review..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+                    <button class="submit-btn">
+                        Submit Review
+                    </button>
+
+                </form>
+
+            </div>
+
+            <% } %>
+
+            <!-- REVIEWS -->
+
+            <div class="reviews-section">
+
+                <% if(info.reviews.length){ %>
+
+                <h2 class="reviews-title">
+                    Guest Reviews
+                </h2>
+
+                <% } else { %>
+
+                <div class="no-review">
+                    No reviews yet.
+                </div>
+
+                <% } %>
+
+                <% for(rev of info.reviews){ %>
+
+                <div class="review-card">
+
+                    <div class="review-top">
+
+                        <div class="review-user">
+
+                            <div class="review-avatar">
+                                <%= rev.createdBy.username.charAt(0).toUpperCase() %>
+                            </div>
+
+                            <div>
+
+                                <h4>
+                                    <%= rev.createdBy.username %>
+                                </h4>
+
+                                <div class="review-date">
+                                    <%= rev.createdAt.toDateString() %>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                         <p class="starability-result" data-rating="<%= rev.rating %>">
+    Rated: <%= rev.rating %> stars
+</p>
+
+                    </div>
+
+                    <div class="review-comment">
+                        <%= rev.comment %>
+                    </div>
+
+                    <% if (isCurrent && isCurrent._id.equals(rev.createdBy._id)) { %>
+
+                    <form
+                        method="POST"
+                        action="/listing/<%= info._id %>/review/<%= rev._id %>?_method=DELETE"
+                    >
+
+                        <button class="del-btn">
+                            Delete Review
+                        </button>
+
+                    </form>
+
+                    <% } %>
+
+                </div>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<hr>
+
+<%- include("include/footer.ejs") %>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/script.js"></script>
+
+</body>
+</html>

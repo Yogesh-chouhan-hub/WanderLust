@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Listing</title>
+
+    <link rel="stylesheet" href="/style.css" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #f6f8fc;
+        font-family: "Poppins", sans-serif;
+      }
+
+      /* PAGE */
+
+      .page-wrapper {
+        min-height: 100vh;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 60px 20px;
+      }
+
+      /* FORM CARD */
+
+      .form-container {
+        width: 100%;
+        max-width: 580px;
+
+        background: rgba(255, 255, 255, 0.95);
+
+        backdrop-filter: blur(12px);
+
+        border-radius: 24px;
+
+        padding: 38px;
+
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+
+        border: 1px solid rgba(255, 255, 255, 0.4);
+
+        animation: fadeUp 0.6s ease;
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* HEADING */
+
+      .form-container h2 {
+        text-align: center;
+
+        font-size: 32px;
+
+        margin-bottom: 10px;
+
+        color: #111827;
+      }
+
+      .form-subtitle {
+        text-align: center;
+
+        color: #6b7280;
+
+        font-size: 15px;
+
+        margin-bottom: 35px;
+      }
+
+      /* INPUT GROUP */
+
+      .input-group {
+        margin-bottom: 22px;
+      }
+
+      .input-group label {
+        display: block;
+
+        margin-bottom: 8px;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        color: #374151;
+      }
+
+      /* INPUTS */
+
+      .form-container input,
+      .form-container textarea {
+        width: 100%;
+
+        padding: 14px 16px;
+
+        border: 1px solid #e5e7eb;
+
+        border-radius: 14px;
+
+        background: #fff;
+
+        font-size: 15px;
+
+        transition: 0.3s ease;
+
+        outline: none;
+      }
+
+      .form-container textarea {
+        resize: none;
+        min-height: 120px;
+      }
+
+      .form-container input:focus,
+      .form-container textarea:focus {
+        border-color: #ff385c;
+
+        box-shadow: 0 0 0 4px rgba(255, 56, 92, 0.12);
+      }
+
+      /* FILE INPUT */
+
+      .form-container input[type="file"] {
+        padding: 12px;
+
+        background: #fafafa;
+
+        cursor: pointer;
+      }
+
+      /* GRID */
+
+      .grid-2 {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 18px;
+      }
+
+      /* BUTTON */
+
+      .submit-btn {
+        width: 100%;
+
+        border: none;
+
+        padding: 15px;
+
+        margin-top: 10px;
+
+        border-radius: 16px;
+
+        background: linear-gradient(135deg, #ff385c, #ff7a18);
+
+        color: white;
+
+        font-size: 16px;
+
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: 0.35s ease;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-3px);
+
+        box-shadow: 0 15px 30px rgba(255, 56, 92, 0.28);
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 768px) {
+        .form-container {
+          padding: 28px 22px;
+
+          border-radius: 20px;
+        }
+
+        .form-container h2 {
+          font-size: 26px;
+        }
+
+        .grid-2 {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-wrapper">
+      <div class="form-container">
+        <h2>Add New Listing</h2>
+
+        <p class="form-subtitle">Create beautiful stays & travel experiences</p>
+
+        <form action="/listing/new" method="POST" enctype="multipart/form-data">
+          <div class="input-group">
+            <label>Listing Title</label>
+
+            <input
+              type="text"
+              name="title"
+              placeholder="Enter listing title"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label>Description</label>
+
+            <textarea
+              name="description"
+              placeholder="Write something about your place..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="input-group">
+            <label>Upload Image</label>
+
+            <input type="file" name="image" />
+          </div>
+
+          <div class="grid-2">
+            <div class="input-group">
+              <label>Price</label>
+
+              <input
+                type="number"
+                name="price"
+                placeholder="₹ Price"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <label>Location</label>
+
+              <input type="text" name="location" placeholder="City" required />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Country</label>
+
+            <input type="text" name="country" placeholder="Country" required />
+          </div>
+
+          <button type="submit" class="submit-btn">Add Listing</button>
+        </form>
+      </div>
+    </div>
+
+    <%- include("include/footer.ejs") %>
+
+    <script src="/script.js"></script>
+  </body>
+</html>

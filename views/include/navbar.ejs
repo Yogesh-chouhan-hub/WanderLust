@@ -1,0 +1,40 @@
+<nav class="navbar">
+  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+  <div class="logo">
+    <a href="/listing">WanderLust</a>
+  </div>
+
+  <div class="search-wrapper">
+    <form class="search-box" action="/listing" method="GET">
+      <input
+        type="text"
+        name="search"
+        id="searchInput"
+        placeholder="Search destinations..."
+        autocomplete="off"
+      />
+      <button type="submit">Search</button>
+    </form>
+    <div class="suggestions" id="suggestions"></div>
+  </div>
+
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="nav-links" id="navLinks">
+    <div class="close-btn" onclick="toggleMenu()">✕</div>
+    <a href="/listing" onclick="toggleMenu()">Home</a>
+    <a href="/listing/new" onclick="toggleMenu()">Add Listing</a>
+    <% if (isCurrent) { %>
+      <a href="/logout" onclick="toggleMenu()">Logout</a>
+    <% } %>
+    <% if (!isCurrent) { %>
+      <a class="signin" href="/signin" onclick="toggleMenu()">Login</a>
+      <a class="signup" href="/signup" onclick="toggleMenu()">Signup</a>
+    <% } %>
+  </div>
+</nav>
